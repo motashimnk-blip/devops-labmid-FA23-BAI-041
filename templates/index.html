@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assignment Submission Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 15px; }
+    h1 { margin-bottom: 5px; }
+    form { border: 1px solid #999; padding: 15px; margin-bottom: 25px; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 6px; box-sizing: border-box; }
+    button { margin-top: 15px; padding: 8px 20px; }
+    .errors { border: 1px solid #c00; color: #c00; padding: 10px; margin-bottom: 15px; }
+    .ok { border: 1px solid #080; color: #080; padding: 10px; margin-bottom: 15px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #999; padding: 6px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Assignment Submission Portal</h1>
+  <p>CSC418 DevOps for Cloud Computing</p>
+
+  {% if saved %}
+    <div class="ok">Submission saved successfully.</div>
+  {% endif %}
+
+  {% if errors %}
+    <div class="errors">
+      <strong>Submission rejected:</strong>
+      <ul>
+        {% for e in errors %}<li>{{ e }}</li>{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method="post" action="/submit">
+    <label>Student Name
+      <input type="text" name="name" value="{{ form.name or '' }}">
+    </label>
+    <label>Registration Number
+      <input type="text" name="reg_no" value="{{ form.reg_no or '' }}" placeholder="FA23-BAI-041">
+    </label>
+    <label>Assignment Title
+      <input type="text" name="title" value="{{ form.title or '' }}">
+    </label>
+    <label>Submission URL
+      <input type="text" name="url" value="{{ form.url or '' }}" placeholder="https://github.com/...">
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2>Saved Submissions ({{ submissions|length }})</h2>
+  {% if submissions %}
+  <table>
+    <tr><th>#</th><th>Name</th><th>Reg No</th><th>Title</th><th>URL</th><th>Submitted At</th></tr>
+    {% for s in submissions %}
+    <tr>
+      <td>{{ s.id }}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.reg_no }}</td>
+      <td>{{ s.title }}</td>
+      <td><a href="{{ s.url }}" target="_blank">{{ s.url }}</a></td>
+      <td>{{ s.submitted_at }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No submissions yet.</p>
+  {% endif %}
+</body>
+</html>

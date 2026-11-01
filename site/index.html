@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assignment Submission Portal (Demo)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 15px; }
+    form { border: 1px solid #999; padding: 15px; margin-bottom: 25px; }
+    label { display: block; margin-top: 10px; }
+    input { width: 100%; padding: 6px; box-sizing: border-box; }
+    button { margin-top: 15px; padding: 8px 20px; }
+    .errors { border: 1px solid #c00; color: #c00; padding: 10px; margin-bottom: 15px; }
+    .ok { border: 1px solid #080; color: #080; padding: 10px; margin-bottom: 15px; }
+    .hidden { display: none; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #999; padding: 6px; text-align: left; word-break: break-all; }
+    .note { font-size: 13px; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Assignment Submission Portal</h1>
+  <p>CSC418 DevOps for Cloud Computing</p>
+  <p class="note">Static demo on GitHub Pages. Submissions are kept in this browser only
+    (localStorage). The real Flask app saves them in a database.</p>
+
+  <div id="ok" class="ok hidden">Submission saved successfully.</div>
+  <div id="errors" class="errors hidden"></div>
+
+  <form id="form">
+    <label>Student Name <input type="text" id="name"></label>
+    <label>Registration Number <input type="text" id="reg_no" placeholder="FA23-BAI-041"></label>
+    <label>Assignment Title <input type="text" id="title"></label>
+    <label>Submission URL <input type="text" id="url" placeholder="https://github.com/..."></label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2>Saved Submissions (<span id="count">0</span>)</h2>
+  <table>
+    <thead><tr><th>#</th><th>Name</th><th>Reg No</th><th>Title</th><th>URL</th><th>Submitted At</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>
