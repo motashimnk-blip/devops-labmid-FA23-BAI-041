@@ -34,7 +34,7 @@ jobs:
         run: python ci/build_report.py results.xml test-report.json
 
       - name: Send report to local receiver
-        if: always() && secrets.RECEIVER_URL != ''
+        if: always()
         continue-on-error: true
         env:
           RECEIVER_URL: ${{ secrets.RECEIVER_URL }}
