@@ -125,3 +125,7 @@ Deployed URL: `https://<github-username>.github.io/<repo-name>/`
    Push. `test_invalid_url_is_rejected_and_not_saved` fails, the pipeline is red and
    `test-report.json` is updated with `"overall_status": "FAILED"` and the failure message.
 3. Undo the defect and push again. Pipeline is green and the JSON file shows PASSED.
+
+## Report Delivery Test
+
+Testing automatic JSON report delivery from GitHub Actions to my local computer.
