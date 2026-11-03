@@ -10,8 +10,15 @@ REQUIRED_FIELDS = {
 
 
 def is_valid_url(url):
-    """Temporary defect for CI failure demonstration."""
-    return True
+    """Accept only http/https links that have a proper host (e.g. github.com)."""
+    try:
+        parts = urlparse(url)
+    except ValueError:
+        return False
+    if parts.scheme not in ("http", "https"):
+        return False
+    host = parts.hostname or ""
+    return "." in host and " " not in url
 
 
 def validate_submission(data):
